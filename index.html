@@ -1,43 +1,441 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>My Personal Website</title>
-    <style>
-        body {
-            font-family: Arial;
-            max-width: 700px;
-            margin: 40px auto;
-            padding: 20px;
-            line-height: 1.6;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Siddharth | Portfolio</title>
 
-        h1 {
-            color: #333;
-        }
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-        a {
-            color: blue;
-        }
-    </style>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0f172a;
+      color: white;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: min(1100px, 90%);
+      margin: auto;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(12px);
+      background: rgba(15, 23, 42, 0.8);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      z-index: 100;
+    }
+
+    .nav-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+    }
+
+    .logo {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: #60a5fa;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .nav-links a {
+      color: #cbd5e1;
+      transition: 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: white;
+    }
+
+    .hero {
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      background:
+        radial-gradient(circle at top right, rgba(96,165,250,0.18), transparent 30%),
+        radial-gradient(circle at bottom left, rgba(59,130,246,0.12), transparent 30%);
+    }
+
+    .hero-content {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero-text h3 {
+      color: #60a5fa;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .hero-text h1 {
+      font-size: 4rem;
+      line-height: 1.05;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-text p {
+      color: #cbd5e1;
+      font-size: 1.1rem;
+      max-width: 650px;
+      margin-bottom: 2rem;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 0.9rem 1.4rem;
+      border-radius: 14px;
+      font-weight: 600;
+      transition: 0.25s ease;
+      display: inline-block;
+    }
+
+    .btn-primary {
+      background: #2563eb;
+    }
+
+    .btn-primary:hover {
+      background: #1d4ed8;
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      border: 1px solid rgba(255,255,255,0.15);
+      color: #e2e8f0;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.05);
+    }
+
+    .profile-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 28px;
+      padding: 2rem;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.35);
+    }
+
+    .profile-card img {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 1rem;
+      border: 4px solid rgba(255,255,255,0.1);
+    }
+
+    .profile-card h2 {
+      margin-bottom: 0.3rem;
+    }
+
+    .profile-card p {
+      color: #94a3b8;
+      font-size: 0.95rem;
+    }
+
+    section {
+      padding: 6rem 0;
+    }
+
+    .section-title {
+      font-size: 2.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .section-subtitle {
+      color: #94a3b8;
+      margin-bottom: 3rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 24px;
+      padding: 1.7rem;
+      transition: 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(96,165,250,0.4);
+    }
+
+    .card h3 {
+      margin-bottom: 0.8rem;
+    }
+
+    .card p {
+      color: #cbd5e1;
+      font-size: 0.97rem;
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-top: 1.5rem;
+    }
+
+    .skill {
+      background: rgba(96,165,250,0.12);
+      color: #93c5fd;
+      padding: 0.6rem 1rem;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      border: 1px solid rgba(96,165,250,0.25);
+    }
+
+    .contact-box {
+      background: linear-gradient(135deg, rgba(37,99,235,0.22), rgba(59,130,246,0.08));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 28px;
+      padding: 3rem;
+      text-align: center;
+    }
+
+    .contact-box h2 {
+      margin-bottom: 1rem;
+      font-size: 2.2rem;
+    }
+
+    .contact-box p {
+      color: #cbd5e1;
+      margin-bottom: 2rem;
+    }
+
+    footer {
+      padding: 2rem 0;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      color: #94a3b8;
+      text-align: center;
+    }
+
+    @media (max-width: 850px) {
+      .hero-content {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-text h1 {
+        font-size: 3rem;
+      }
+
+      .profile-card {
+        max-width: 350px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
 </head>
 <body>
 
-    <h1>Hello, I'm Siddharth Padithaya</h1>
+  <nav>
+    <div class="container nav-content">
+      <div class="logo">Siddharth.dev</div>
 
-    <p>
-        Welcome to my personal website hosted on GitHub Pages.
-    </p>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
 
-    <h2>About Me</h2>
-    <p>
-        I am learning web development and building cool projects.
-    </p>
+  <section class="hero">
+    <div class="container hero-content">
 
-    <h2>Projects</h2>
-    <ul>
-        <li><a href="#">Project 1</a></li>
-        <li><a href="#">Project 2</a></li>
-    </ul>
+      <div class="hero-text">
+        <h3>Information Science Student @ UMD</h3>
+
+        <h1>
+          Building tech,<br>
+          solving problems,
+          and learning every day.
+        </h1>
+
+        <p>
+          I'm Siddharth, an Information Science student at the University of Maryland.
+          I enjoy working with technology, web development, software projects,
+          hardware support, and building tools that help people.
+        </p>
+
+        <div class="buttons">
+          <a href="#projects" class="btn btn-primary">View Projects</a>
+          <a href="#contact" class="btn btn-secondary">Contact Me</a>
+        </div>
+      </div>
+
+      <div class="profile-card">
+        <img src="https://i.pravatar.cc/300" alt="Profile Picture">
+
+        <h2>Siddharth</h2>
+        <p>UMD Student • Tech Enthusiast</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="container">
+      <h2 class="section-title">About Me</h2>
+      <p class="section-subtitle">
+        A little bit about who I am and what I enjoy working on.
+      </p>
+
+      <div class="grid">
+
+        <div class="card">
+          <h3>Education</h3>
+          <p>
+            Studying Information Science at the University of Maryland, College Park.
+            Interested in software development, IT systems, and user-focused technology.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Experience</h3>
+          <p>
+            Working in hardware support and troubleshooting while continuously learning
+            programming, networking, and modern development tools.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Goals</h3>
+          <p>
+            I want to build impactful applications, improve my engineering skills,
+            and create projects that solve real-world problems.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="container">
+      <h2 class="section-title">Projects</h2>
+      <p class="section-subtitle">
+        Some projects and ideas I've worked on.
+      </p>
+
+      <div class="grid">
+
+        <div class="card">
+          <h3>UMD Lot Spot</h3>
+          <p>
+            A parking availability app designed to help UMD students find open parking spots
+            more easily through community reporting.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Portfolio Website</h3>
+          <p>
+            A personal portfolio hosted with GitHub Pages to showcase projects,
+            skills, and experience.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Future Projects</h3>
+          <p>
+            Planning to build more web apps, automation tools, and software projects
+            involving modern technologies.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="container">
+      <h2 class="section-title">Skills</h2>
+      <p class="section-subtitle">
+        Technologies and tools I work with.
+      </p>
+
+      <div class="skills">
+        <div class="skill">HTML</div>
+        <div class="skill">CSS</div>
+        <div class="skill">JavaScript</div>
+        <div class="skill">Python</div>
+        <div class="skill">Git</div>
+        <div class="skill">GitHub</div>
+        <div class="skill">Hardware Support</div>
+        <div class="skill">Troubleshooting</div>
+        <div class="skill">VS Code</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <div class="contact-box">
+        <h2>Let's Connect</h2>
+
+        <p>
+          Feel free to reach out for collaboration, projects, or just to connect.
+        </p>
+
+        <div class="buttons" style="justify-content:center;">
+          <a href="https://github.com/yourusername" class="btn btn-primary" target="_blank">GitHub</a>
+          <a href="https://linkedin.com" class="btn btn-secondary" target="_blank">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      © 2026 Siddharth. Built with HTML & GitHub Pages.
+    </div>
+  </footer>
 
 </body>
 </html>
